@@ -1,24 +1,28 @@
-console.log('test'); //1
+document.querySelector('#fetchBtn').addEventListener('click', e => {
+	e.preventDefault();
 
+	let id = document.querySelector("#userID").value;
 
+	console.log(id);
 
-let b =document.querySelector('body'); //2
+	//  request
 
-b.innerHTML = "<p>ovo je recenica</p>"; //3
+		let r = fetch('https://62a88cb0943591102ba4e94b.mockapi.io/Projekt1/' + id)
+		.then(response => response.json()).then(data => {
+			console.log(data);
 
-//  https://62a88cb0943591102ba4e94b.mockapi.io
+			let podaci = document.querySelector('#podaci');
 
-let r = fetch('https://62a88cb0943591102ba4e94b.mockapi.io/Projekt1')
-.then(response => response.json()).then(data => {
-	console.log(data);
-}).catch(error => {
-	alert(error);
+			podaci.innerHTML = `<p><b>${data['email']}</b></p>
+			                     <p>${data['username']}</p> 
+			                     <p><i>${data['password']}</i></p>`;
+
+		}).catch(error => {
+			alert(error);
+		});
 });
 
 
 
 
 
-/*let t = document.querySelector('body p');
-
-t.style.color = 'red';*/
